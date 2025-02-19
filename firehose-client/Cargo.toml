@@ -1,0 +1,14 @@
+[package]
+name = "firehose-client"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+tonic-build = {version = "0.13", git = "https://github.com/hyperium/tonic.git" }
+
+[dependencies]
+prost = "0.13.4"
+prost-types = "0.13.4"
+tonic = { version = "0.13", features = ["tls-ring", "tls-native-roots", "transport", "gzip", "deflate", "zstd"], git = "https://github.com/hyperium/tonic.git" }
+
+
