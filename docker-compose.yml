@@ -1,0 +1,12 @@
+# This is suitable for running examples and tests in the srepo
+services:
+  cockroachdb:
+    image: cockroachdb/cockroach:latest-v24.3
+    command: ["start-single-node", "--insecure"]
+    ports:
+      - "26257:26257"
+    volumes:
+      - cockroach_data:/cockroach/cockroach-data
+
+volumes:
+  cockroach_data: 

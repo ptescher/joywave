@@ -1,0 +1,9 @@
+[workspace]
+resolver = "2"
+
+members = [ "cli", "coordinator", "firehose-client", "idl-decoder"]
+
+[workspace.dependencies]
+firehose-client = { path = "firehose-client" }
+idl-decoder = { path = "idl-decoder" }
+coordinator = { path = "coordinator" }
