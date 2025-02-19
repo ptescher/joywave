@@ -1,0 +1,18 @@
+[package]
+name = "cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ballista-scheduler = { version = "44.0", git = "https://github.com/apache/datafusion-ballista.git" }
+coordinator = { workspace = true }
+datafusion = "44.0"
+datafusion-federation = "0.3.5"
+datafusion-postgres = { git = "https://github.com/sunng87/datafusion-postgres.git" }
+tokio = { version = "1", features = ["full", "rt-multi-thread"] }
+dotenv = "0.15"
+env_logger = "0.11.6"
+futures = "0.3.31"
+log = "0.4.25"
+pgwire = "0.28.0"
+argh = "0.1.13"

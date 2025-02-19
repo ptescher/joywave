@@ -1,0 +1,32 @@
+[package]
+name = "coordinator"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+arrow-schema = { version = "53", features = ["serde"] }
+async-trait = "0.1.86"
+ballista = { version = "44.0", git = "https://github.com/apache/datafusion-ballista.git" }
+ballista-core = { version = "44.0", git = "https://github.com/apache/datafusion-ballista.git" }
+datafusion = "44.0"
+datafusion-expr = "44.0"
+datafusion-federation = "0.3.5"
+datafusion-proto = "44.0"
+datafusion-table-providers = { version = "0.2", features = ["postgres"] }
+firehose-client = { workspace = true }
+idl-decoder = { workspace = true }
+futures = "0.3.31"
+futures-util = "0.3.31"
+log = "0.4.25"
+primitive-types = "0.13.1"
+serde = "1.0"
+serde_json = "1.0.138"
+pgwire = "0.28"
+sologger_log_context = "0.2.1"
+base64 = "0.22.1"
+bs58 = "0.5"
+
+[dev-dependencies]
+dotenv = "0.15"
+tokio = { version = "1", features = ["full", "rt-multi-thread"] }
+env_logger = "0.11.6"
