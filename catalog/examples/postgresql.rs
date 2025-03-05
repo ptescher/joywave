@@ -15,7 +15,7 @@ async fn main() -> Result<()> {
     dotenv::dotenv().ok();
     env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
 
-    let ctx = coordinator::default_context::create_default_context(false).await?;
+    let ctx = catalog::default_context::create_default_context(false).await?;
 
     ctx.sql("SET datafusion.execution.batch_size to 100")
         .await?;
@@ -79,7 +79,8 @@ async fn main() -> Result<()> {
             token_address,
             string_from_uint256_bytes(transfer_amount) as transfer_amount_string
         FROM erc20_transfers
-        WHERE block_number > -100 AND block_number < -1
+        WHERE  block_number > 21840000
+            AND block_number < 21840010
         LIMIT 10000;
 "#,
         )
@@ -96,12 +97,17 @@ async fn main() -> Result<()> {
         log::info!("\rProcessing {}%...", total_batches);
     }
 
+    let total_transfers = conn
+        .execute("SELECT COUNT(*) FROM token_transfers", &[])
+        .await
+        .unwrap();
+
     let duration = std::time::Instant::now().duration_since(start_time);
     log::info!("Total time: {:?}", duration);
-    log::info!("Total erc20 transfers: {}", total_batches * 10000);
+    log::info!("Total erc20 transfers: {}", total_transfers);
     log::info!(
         "Transfers / second: {}",
-        (total_batches as f64 * 10000.0 / duration.as_millis() as f64) * 1000.0
+        (total_transfers as f64 / duration.as_millis() as f64) * 1000.0
     );
 
     Ok(())

@@ -6,7 +6,7 @@ async fn main() -> Result<()> {
     dotenv::dotenv().ok();
     env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
 
-    let ctx = coordinator::default_context::create_default_context(false).await?;
+    let ctx = catalog::default_context::create_default_context(false).await?;
 
     let df: datafusion::prelude::DataFrame = ctx
         .sql(

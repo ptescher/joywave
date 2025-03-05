@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 ballista-scheduler = { version = "44.0", git = "https://github.com/apache/datafusion-ballista.git" }
-coordinator = { workspace = true }
+catalog = { workspace = true }
 datafusion = "44.0"
 datafusion-federation = "0.3.5"
 datafusion-postgres = { git = "https://github.com/sunng87/datafusion-postgres.git" }

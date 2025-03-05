@@ -1,0 +1,16 @@
+[package]
+name = "scheduler"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+async-trait = "0.1.87"
+catalog = { workspace = true }
+futures = "0.3.31"
+log = "0.4.26"
+
+
+[dev-dependencies]
+dotenv = "0.15"
+tokio = { version = "1", features = ["full", "rt-multi-thread"] }
+env_logger = "0.11.6"

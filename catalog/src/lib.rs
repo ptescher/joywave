@@ -4,3 +4,4 @@ pub mod default_context;
 mod encoder;
 mod tables;
 mod udfs;
+pub use datafusion;

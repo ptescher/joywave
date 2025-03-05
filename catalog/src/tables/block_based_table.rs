@@ -281,7 +281,7 @@ impl<P: BlockProcessor> BlockBasedTableProvider<P> {
             }
             Expr::Cast(cast) => self.supports_expr_pushdown(cast.expr.as_ref()),
             other => {
-                log::warn!("Unsupported expr pushdown: {:?}", other);
+                log::debug!("Unsupported expr pushdown: {:?}", other);
                 false
             }
         }

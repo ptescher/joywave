@@ -1,7 +1,11 @@
 [package]
-name = "coordinator"
+name = "catalog"
 version = "0.1.0"
 edition = "2021"
+
+[features]
+default = ["mocks"]
+mocks = []
 
 [dependencies]
 arrow-schema = { version = "53", features = ["serde"] }
@@ -25,6 +29,7 @@ pgwire = "0.28"
 sologger_log_context = "0.2.1"
 base64 = "0.22.1"
 bs58 = "0.5"
+bytes = "1.10.1"
 
 [dev-dependencies]
 dotenv = "0.15"

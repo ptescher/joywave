@@ -26,13 +26,19 @@ pub enum Block {
 pub enum FirehoseEndpoint {
     EthereumMainnet,
     SolanaMainnet,
+    Other(String),
 }
 
-impl FirehoseEndpoint {
-    fn as_str(&self) -> &'static str {
+impl Into<bytes::Bytes> for FirehoseEndpoint {
+    fn into(self) -> bytes::Bytes {
         match self {
-            FirehoseEndpoint::EthereumMainnet => "https://mainnet.eth.streamingfast.io:443",
-            FirehoseEndpoint::SolanaMainnet => "https://mainnet.sol.streamingfast.io:443",
+            FirehoseEndpoint::EthereumMainnet => {
+                bytes::Bytes::from_static(b"https://mainnet.eth.streamingfast.io:443")
+            }
+            FirehoseEndpoint::SolanaMainnet => {
+                bytes::Bytes::from_static(b"https://mainnet.sol.streamingfast.io:443")
+            }
+            FirehoseEndpoint::Other(url) => bytes::Bytes::from(url),
         }
     }
 }
@@ -82,7 +88,8 @@ impl BlockSource {
                 access_token_source,
             } => {
                 let client: firehose_client::tonic::transport::Channel =
-                    firehose_client::tonic::transport::Channel::from_static(endpoint.as_str())
+                    firehose_client::tonic::transport::Channel::from_shared(endpoint.clone())
+                        .expect("Invalid URL")
                         .tls_config(
                             firehose_client::tonic::transport::ClientTlsConfig::new()
                                 .with_native_roots(),
@@ -155,7 +162,8 @@ impl BlockSource {
                 access_token_source,
             } => {
                 let client: firehose_client::tonic::transport::Channel =
-                    firehose_client::tonic::transport::Channel::from_static(endpoint.as_str())
+                    firehose_client::tonic::transport::Channel::from_shared(endpoint)
+                        .expect("Invalid endpoint")
                         .tls_config(
                             firehose_client::tonic::transport::ClientTlsConfig::new()
                                 .with_native_roots(),
@@ -262,5 +270,25 @@ impl BlockSource {
         capacity: usize,
     ) -> impl futures::stream::Stream<Item = Vec<Block>> {
         self.stream_blocks().chunks(capacity)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use tokio::test;
+
+    #[test]
+    async fn test_get_latest_block_number() {
+        let config = BlockSourceConfig {
+            block_type: BlockType::Solana,
+            provider: BlockProvider::Firehose {
+                endpoint: FirehoseEndpoint::SolanaMainnet,
+                access_token_source: AccessTokenSource::Static("TEST".to_string()),
+            },
+        };
+
+        let block_number = get_latest_block_number(config).await;
+        assert!(block_number > 0, "Block number should be greater than 0");
     }
 }

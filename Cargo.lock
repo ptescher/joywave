@@ -661,9 +661,9 @@ dependencies = [
 
 [[package]]
 name = "async-trait"
-version = "0.1.86"
+version = "0.1.87"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "644dd749086bf3771a2fbc5f256fdb982d53f011c7d5d560304eafeecebce79d"
+checksum = "d556ec1359574147ec0c4fc5eb525f3f23263a592b1a9c07e0a75b427de55c97"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1257,9 +1257,9 @@ checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
 name = "bytes"
-version = "1.10.0"
+version = "1.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f61dac84819c6588b558454b194026eb1f09c293b9036ae9b159e74e73ab6cf9"
+checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 
 [[package]]
 name = "bzip2"
@@ -1299,6 +1299,37 @@ checksum = "88da5a13c620b4ca0078845707ea9c3faf11edbc3ffd8497d11d686211cd1ac0"
 dependencies = [
  "serde",
  "toml 0.8.20",
+]
+
+[[package]]
+name = "catalog"
+version = "0.1.0"
+dependencies = [
+ "arrow-schema",
+ "async-trait",
+ "ballista",
+ "ballista-core",
+ "base64 0.22.1",
+ "bs58",
+ "bytes",
+ "datafusion",
+ "datafusion-expr",
+ "datafusion-federation",
+ "datafusion-proto",
+ "datafusion-table-providers",
+ "dotenv",
+ "env_logger",
+ "firehose-client",
+ "futures",
+ "futures-util",
+ "idl-decoder",
+ "log",
+ "pgwire",
+ "primitive-types",
+ "serde",
+ "serde_json",
+ "sologger_log_context",
+ "tokio",
 ]
 
 [[package]]
@@ -1425,7 +1456,7 @@ version = "0.1.0"
 dependencies = [
  "argh",
  "ballista-scheduler",
- "coordinator",
+ "catalog",
  "datafusion",
  "datafusion-federation",
  "datafusion-postgres",
@@ -1555,36 +1586,6 @@ name = "constant_time_eq"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7c74b8349d32d297c9134b8c88677813a227df8f779daa29bfc29c183fe3dca6"
-
-[[package]]
-name = "coordinator"
-version = "0.1.0"
-dependencies = [
- "arrow-schema",
- "async-trait",
- "ballista",
- "ballista-core",
- "base64 0.22.1",
- "bs58",
- "datafusion",
- "datafusion-expr",
- "datafusion-federation",
- "datafusion-proto",
- "datafusion-table-providers",
- "dotenv",
- "env_logger",
- "firehose-client",
- "futures",
- "futures-util",
- "idl-decoder",
- "log",
- "pgwire",
- "primitive-types",
- "serde",
- "serde_json",
- "sologger_log_context",
- "tokio",
-]
 
 [[package]]
 name = "core-foundation"
@@ -3478,9 +3479,9 @@ dependencies = [
 
 [[package]]
 name = "log"
-version = "0.4.25"
+version = "0.4.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "04cbf5b083de1c7e0222a7a51dbfdba1cbe1c6ab0b15e29fff3f6c077fd9cd9f"
+checksum = "30bde2b3dc3671ae49d8e2e9f044c7c005836e7a023ee57cffa25ab82764bb9e"
 
 [[package]]
 name = "lru-cache"
@@ -4714,6 +4715,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1f29ebaa345f945cec9fbbc532eb307f0fdad8161f281b6369539c8d84876b3d"
 dependencies = [
  "windows-sys 0.59.0",
+]
+
+[[package]]
+name = "scheduler"
+version = "0.1.0"
+dependencies = [
+ "async-trait",
+ "catalog",
+ "dotenv",
+ "env_logger",
+ "futures",
+ "log",
+ "tokio",
 ]
 
 [[package]]

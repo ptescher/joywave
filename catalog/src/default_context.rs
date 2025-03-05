@@ -19,7 +19,7 @@ pub async fn create_default_context(
     let ctx: SessionContext = if enable_ballista {
         let session_config = SessionConfig::new_with_ballista()
             .with_information_schema(true)
-            .with_ballista_job_name("Coordinator example")
+            .with_ballista_job_name("Catalog example")
             .with_ballista_logical_extension_codec(Arc::new(crate::encoder::Codec::new()))
             .with_ballista_physical_extension_codec(Arc::new(crate::encoder::Codec::new()));
 

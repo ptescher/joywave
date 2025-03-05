@@ -1,9 +1,9 @@
 [workspace]
 resolver = "2"
 
-members = [ "cli", "coordinator", "firehose-client", "idl-decoder"]
+members = [ "cli", "catalog", "firehose-client", "idl-decoder", "scheduler"]
 
 [workspace.dependencies]
 firehose-client = { path = "firehose-client" }
 idl-decoder = { path = "idl-decoder" }
-coordinator = { path = "coordinator" }
+catalog = { path = "catalog" }

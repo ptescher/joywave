@@ -9,7 +9,7 @@ async fn main() -> Result<()> {
 
     log::info!("Counting swaps by block number");
 
-    let ctx = coordinator::default_context::create_default_context(false).await?;
+    let ctx = catalog::default_context::create_default_context(false).await?;
 
     ctx.sql("SET datafusion.execution.batch_size to 5").await?;
     ctx.sql("SET datafusion.execution.target_partitions to 1")

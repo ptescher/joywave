@@ -28,7 +28,7 @@ async fn main() -> Result<()> {
 
     let args: Args = argh::from_env();
 
-    let ctx = coordinator::default_context::create_default_context(args.enable_ballista).await?;
+    let ctx = catalog::default_context::create_default_context(args.enable_ballista).await?;
 
     let factory = Arc::new(HandlerFactory(Arc::new(DfSessionService::new(ctx))));
 
